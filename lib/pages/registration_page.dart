@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'user_info_page.dart';
+import 'main_page.dart';
 
 // SRSP5: форма регистрации с валидацией.
 // Каждое поле имеет свой Controller и FocusNode, проверка идёт через
@@ -116,8 +116,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
     await prefs.setString('life_story', _storyController.text.trim());
 
     if (!mounted) return;
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => const UserInfoPage()),
+    // после регистрации сразу попадаем в приложение, без возврата на форму
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (_) => const MainPage()),
     );
   }
 

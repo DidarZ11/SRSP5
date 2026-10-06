@@ -6,7 +6,7 @@ import '../core/constants/app_colors.dart';
 import '../core/constants/app_text_styles.dart';
 import '../core/localization/app_locales.dart';
 import '../translations/locale_keys.g.dart';
-import 'registration_page.dart';
+import 'user_info_page.dart';
 
 // Страница профиля
 class ProfilePage extends StatefulWidget {
@@ -108,23 +108,21 @@ class _ProfilePageState extends State<ProfilePage> {
                   },
                 ),
                 const Divider(height: 1),
-                // SRSP5: форма регистрации с валидацией (TextFormField,
-                // FocusNode, FormKey) и сохранением через SharedPreferences
+                // SRSP5: данные, сохранённые формой регистрации при входе
+                // в приложение (SharedPreferences)
                 ListTile(
                   leading: const Icon(
-                    Icons.app_registration,
+                    Icons.badge_outlined,
                     color: AppColors.primary,
                   ),
                   title: Text(
-                    'SRSP5: Registration Form',
+                    'SRSP5: User Info',
                     style: AppTextStyles.body,
                   ),
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => const RegistrationPage(),
-                      ),
+                      MaterialPageRoute(builder: (_) => const UserInfoPage()),
                     );
                   },
                 ),
