@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'registration_page.dart';
+
 // SRSP5: страница показывает данные, сохранённые RegistrationPage
 // через SharedPreferences.
 class UserInfoPage extends StatefulWidget {
@@ -12,7 +14,8 @@ class UserInfoPage extends StatefulWidget {
 }
 
 class _UserInfoPageState extends State<UserInfoPage> {
-  static const _blue = Color(0xFF3B82F6);
+  // чёрно-белая тема под мангу
+  static const _blue = Colors.black;
 
   bool _loading = true;
   String _name = '';
@@ -44,7 +47,12 @@ class _UserInfoPageState extends State<UserInfoPage> {
     await prefs.remove('email');
     await prefs.remove('life_story');
     if (!mounted) return;
-    Navigator.of(context).pop();
+    // данных больше нет — отправляем обратно на форму регистрации,
+    // убирая весь предыдущий стек экранов
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (_) => const RegistrationPage()),
+      (route) => false,
+    );
   }
 
   Widget _infoTile(IconData icon, String label, String value) {
@@ -115,22 +123,13 @@ class _UserInfoPageState extends State<UserInfoPage> {
                 SizedBox(
                   width: double.infinity,
                   height: 44.h,
-                  child: OutlinedButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: const Text('Edit Info'),
-                  ),
-                ),
-                SizedBox(height: 12.h),
-                SizedBox(
-                  width: double.infinity,
-                  height: 44.h,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFE05B4E),
+                      backgroundColor: Colors.black,
                       foregroundColor: Colors.white,
                     ),
                     onPressed: _clearAndGoBack,
-                    child: const Text('Clear Data'),
+                    child: const Text('Clear Data & Log Out'),
                   ),
                 ),
               ],

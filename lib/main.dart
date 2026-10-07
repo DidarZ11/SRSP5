@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/constants/app_colors.dart';
 import 'core/localization/app_locales.dart';
 import 'translations/codegen_loader.g.dart';
-import 'pages/registration_page.dart';
+import 'pages/auth_gate.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -68,7 +68,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
 
-          home: const RegistrationPage(),
+          home: const AuthGate(),
         );
       },
     );

@@ -35,9 +35,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   bool _obscurePassword = true;
 
-  static const _blue = Color(0xFF3B82F6);
-  static const _green = Color(0xFF5CB85C);
-  static const _red = Color(0xFFE05B4E);
+  // чёрно-белая тема под мангу: один чёрный цвет на всё
+  static const _ink = Colors.black;
 
   @override
   void dispose() {
@@ -125,7 +124,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   // кнопка-корзина, очищающая поле
   Widget _clearButton(TextEditingController controller) {
     return IconButton(
-      icon: Icon(Icons.delete_outline, color: _red, size: 22.sp),
+      icon: Icon(Icons.delete_outline, color: _ink, size: 22.sp),
       onPressed: () => setState(controller.clear),
     );
   }
@@ -135,19 +134,26 @@ class _RegistrationPageState extends State<RegistrationPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: _blue,
+        backgroundColor: _ink,
         foregroundColor: Colors.white,
         centerTitle: true,
         title: const Text(
-          'Register Form',
-          style: TextStyle(fontWeight: FontWeight.w600),
+          'MANGA SHOP',
+          style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 2),
         ),
       ),
-      body: Form(
-        key: _formKey,
-        child: ListView(
-          padding: EdgeInsets.all(16.w),
-          children: [
+      // Theme красит рамки, подписи и иконки полей в чёрный,
+      // чтобы вся форма была чёрно-белой
+      body: Theme(
+        data: Theme.of(context).copyWith(
+          colorScheme: const ColorScheme.light(primary: _ink),
+          textSelectionTheme: const TextSelectionThemeData(cursorColor: _ink),
+        ),
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            padding: EdgeInsets.all(16.w),
+            children: [
             // Full Name
             TextFormField(
               controller: _nameController,
@@ -276,7 +282,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               height: 48.h,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: _green,
+                  backgroundColor: _ink,
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(6.r),
@@ -293,7 +299,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
             ),
             SizedBox(height: 16.h),
-          ],
+            ],
+          ),
         ),
       ),
     );

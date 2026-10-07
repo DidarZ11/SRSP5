@@ -116,7 +116,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     color: AppColors.primary,
                   ),
                   title: Text(
-                    'SRSP5: User Info',
+                    'User Info',
                     style: AppTextStyles.body,
                   ),
                   trailing: const Icon(Icons.chevron_right),
